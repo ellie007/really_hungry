@@ -1,0 +1,54 @@
+<!-- qr code -->
+ <script type="text/javascript" src="js/qrdecoder/grid.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/version.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/detector.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/formatinf.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/errorlevel.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/bitmat.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/datablock.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/bmparser.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/datamask.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/rsdecoder.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/gf256poly.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/gf256.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/decoder.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/QRCode.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/findpat.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/alignpat.js"></script>
+ <script type="text/javascript" src="js/qrdecoder/databr.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery191.js"></script>
+
+<script type="text/javascript">
+
+ var capture = null;
+ var image = null;
+
+ /**
+ * Show camera
+ */
+ function getImage()
+ {
+ capture = navigator.device.capture;
+ capture.captureImage(getImageSuccess, getImageFailure);
+ }
+
+ function getImageFailure(error){
+ alert('Something went wrong...');
+ }
+
+ function getImageSuccess(img){
+ image = img;
+ decodeImage();
+ }
+function alertDecodeResult(result){
+ alert(result);
+ }
+
+ function decodeImage(){
+ imagePath = image[0]['fullPath']
+ qrcode.callback = alertDecodeResult;
+ qrcode.decode(imagePath);
+ }
+</script>
+
+<button onclick="getImage()">Scan It</button>
